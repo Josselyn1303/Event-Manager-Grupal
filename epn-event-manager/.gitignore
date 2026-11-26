@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.vscode/
+
+
+# Base de datos local de pruebas
+db/*.sqlite
+db/*.sqlite-wal
+db/*.sqlite-shm
