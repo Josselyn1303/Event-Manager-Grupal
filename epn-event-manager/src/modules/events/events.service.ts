@@ -54,19 +54,22 @@ export class EventsService {
       return { ok: true };
     }
 
+    
     if (action === 'DELETE') {
-      // BUG INTENCIONAL (correctivo): se construye el objeto pero se devuelve
-      // exito antes de persistirlo. El save nunca se ejecuta.
-      this.deleteRepo.create({
+      const ev = this.deleteRepo.create({
         source: dto.source,
         entity: dto.entity,
         action: dto.action,
         title: dto.title,
         payload: payloadStr,
         createdAt: localDate,
-      });
-      return { ok: true };
-    }
+        });
+
+        await this.deleteRepo.save(ev);
+
+        return { ok: true };
+}
+
 
     if (action === 'QUERY') {
       const ev = this.queryRepo.create({
